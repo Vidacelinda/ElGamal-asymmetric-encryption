@@ -1,7 +1,7 @@
 # ElGamal-asymmetric-encryption
 ## created by Carlo Leiva
 
-### discrption of ElGamal
+### Discrption of ElGamal
 
 ElGamal encryption is a public-key cryptosystem based on the Diffie-Hellman key exchange principle. It's designed for secure data encryption and relies on the discrete logarithm problem for its security, making it computationally infeasible to break with current technology. Here’s a quick summary of its key aspects:
 
