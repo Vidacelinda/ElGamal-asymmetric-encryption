@@ -10,7 +10,7 @@ using namespace std;
 int mod = 1e9 + 7;
 int g = 5;
 
-
+// random number
 int getrand(int l, int r)
 {
   // generates random number from range [l, r]
@@ -20,7 +20,7 @@ int getrand(int l, int r)
   return distr(gen);
 }
 
-int bin_exp(int a, int b, int c)// algorithm 
+int bin_exp(int a, int b, int c)// algorithm
 {
   if (b == 0)
   {
@@ -35,6 +35,7 @@ int bin_exp(int a, int b, int c)// algorithm
     return t * t % c;
 }
 
+//generate private keys and public keys
 pair<int, int> generate_key()
 {
   int private_key = getrand(1, mod - 1);
