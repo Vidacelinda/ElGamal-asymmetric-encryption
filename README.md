@@ -7,7 +7,9 @@ Algorithm I worte for how to execute the ElGamal asymetric encryption and how to
 
 ### Functionality 
 Key Generation: The program starts by generating a key pair (private and public keys) and displaying them.
+
 Encryption: It prompts the user to input a message (within the valid range) and the public key of the receiver (for simplicity, the program uses the generated public key). It then encrypts the message and outputs the ciphertext, consisting of two numbers (Y1 and Y2).
+
 Decryption: Finally, the program decrypts the ciphertext using the private key and displays the original message, demonstrating the end-to-end encryption and decryption process.
 
 ### terminal out put 
