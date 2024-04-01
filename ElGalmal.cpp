@@ -6,109 +6,98 @@ using namespace std;
 
 #define int long long
 
-int binary_exp(int a, int b, int c) {
-  if (b == 0) {
-    return 1;
-  }
-  int t = binary_exp(a, b / 2, c);
-  if (b % 2) {
-    return t * t % c * a % c; 
-  } else return t * t % c;
-}
-
-int mod = 1e9 + 7; //this has 30 bit size with +7 to make it a prime numebr
+// 30 bit size with +7 to make it a prime number
+int mod = 1e9 + 7;
 int g = 5;
 
-int getrand(int l, int r) {
-  // generates a uniformly distributed random number in the range [l, r]
-  std::random_device rd; // obtain a random number from hardware
-  std::mt19937 gen(rd()); // seed the generator
+
+int getrand(int l, int r)
+{
+  // generates random number from range [l, r]
+  std::random_device rd;  // obtain a random number
+  std::mt19937 gen(rd()); 
   std::uniform_int_distribution<> distr(l, r);
   return distr(gen);
 }
 
-pair<int, int> generate_key() {
+int bin_exp(int a, int b, int c)// algorithm 
+{
+  if (b == 0)
+  {
+    return 1;
+  }
+  int t = bin_exp(a, b / 2, c);
+  if (b % 2)
+  {
+    return t * t % c * a % c;
+  }
+  else
+    return t * t % c;
+}
+
+pair<int, int> generate_key()
+{
   int private_key = getrand(1, mod - 1);
-  int public_key = binary_exp(g, private_key, mod);
+  int public_key = bin_exp(g, private_key, mod);
   return {private_key, public_key};
 }
 
-pair<int, int> encrypt(int message, int public_key) {
+pair<int, int> encrypt(int message, int public_key)
+{
   int secret = getrand(1, mod - 1);
-  int shared_secret = binary_exp(public_key, secret, mod);
-  int c1 = binary_exp(g, secret, mod);
-  int c2 = message * shared_secret % mod; 
+  int sh_secret = bin_exp(public_key, secret, mod);
+  //chipher text 1
+  int c1 = bin_exp(g, secret, mod);
+  //chipher text 2
+  int c2 = message * sh_secret % mod;
   return {c1, c2};
 }
 
-int decrypt(pair<int, int> encrypted_message, int private_key) {
-  int c1 = encrypted_message.first;
-  int c2 = encrypted_message.second;
-  // Generate shared secret
-  int shared_secret = binary_exp(c1, private_key, mod);
-  // Now invert the multiplaction
-  int inverse = binary_exp(shared_secret, mod - 2, mod);
+int decrypt(int c1,int c2, int private_key)
+{
+  int sh_secret = bin_exp(c1, private_key, mod);
+  // inverse multiplaction
+  int inverse = bin_exp(sh_secret, mod - 2, mod);
   int message = c2 * inverse % mod;
   return message;
 }
 
-void show_menu() {
-  cout << "\n\n\nChoose an operation:\n";
-  cout << "1. Generate key pair\n";
-  cout << "2. Encrypt\n";
-  cout << "3. Decrypt\n";
-  cout << "4. Exit\n";
-}
 
-signed main() {
-  while (1) {
-    show_menu();
-    // int response;//for menu testing 
-    int response=1;//int response=1; for debuging
-    // cin >> response;
-    int private_key;
-    int public_key;
-    int Y1;
-    int Y2;
-    if (response == 1) {
-      pair<int, int> key = generate_key();
-      private_key=key.first;//globaly stored keys
-      public_key=key.second;
-      cout << "Private key: " << key.first << "\n";
-      cout << "Public key: " << key.second << "\n";
 
-    response=2;// for debuging
-    } if (response == 2) {
-      cout << "Enter your message (a number between 1 and " << mod << "): ";
-      int message=101;//debuging
-      // int message; //for menu
-      // cin >> message;
-      cout << "Enter public key of receiver: ";
-      int public_key;
-      // cin >> public_key;
-      pair<int, int> encrypted_message = encrypt(message, public_key);
-      cout << "First part:" << encrypted_message.first << "\n";//ciphertext 1
-      cout << "Second part:" << encrypted_message.second << "\n";//ciphertext 2
+signed main()
+{
+  int private_key = 0;
+  int public_key = 0;
+  int Y1 = 0; // cipher text 1
+  int Y2 = 0; // cipher text 2
 
-    response=3; //for debuging
-    } if (response == 3) {
-      pair<int, int> encrypted_message;
-      cout << "Enter first part of encrypted message: ";
-      cout << encrypted_message.first;
-      // cin >> encrypted_message.first;
-      cout << "Enter second part of encrypted message: ";
-      // cin >> encrypted_message.second;
-      cout << "Enter your private key: ";
-      int private_key;
-      cin >> private_key;
-      int message = decrypt(encrypted_message, private_key);
-      cout << "Decrypted message: " << message << "\n";
+  cout<< " ***** Generating Key ***** \n";
+  pair<int, int> key = generate_key();
+  private_key = key.first;
+  public_key = key.second;
+  cout << "Private key: " << private_key << "\n";
+  cout << "Public key: " << public_key << "\n";
 
-    response=4;
-    } else {
-      break;
-    }
-    getchar();
-  }
+
+  cout<<"\n ***** Encryption ***** \n";
+  cout << "Enter your message (a number between 1 and " << mod << "): ";
+  // int message = 101; // debuging TESTING ONLY
+  int message; //messasge 
+  cin >> message;
+  cout << "Enter public key of receiver: ";
+  // int public_key;
+  // cin >> public_key;
+  pair<int, int> encrypted_message = encrypt(message, public_key);
+  Y1 = encrypted_message.first;
+  Y2 = encrypted_message.second;
+  cout << "\n Cipher text 1:" << Y1<< "\n";   // ciphertext 1
+  cout << " Chiper text 2:" << Y2<< "\n"; // ciphertext 2
+
+
+  cout<< "\n ***** Decryption ***** \n";
+
+  int dmessage = decrypt(Y1,Y2, private_key);
+  cout << "Decrypted message: " << dmessage << "\n";
+
   return 0;
 }
