@@ -31,6 +31,7 @@ Decryption: Finally, the program decrypts the ciphertext using the private key a
 ## how to run file
 
 run file ElGalmal.cpp 
+
 <img width="659" alt="image" src="https://github.com/Vidacelinda/ElGamal-asymmetric-encryption/assets/87499194/bb9d78b0-6353-4464-bcaa-0f4dd8ffc2b0">
 
 
