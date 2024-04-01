@@ -28,13 +28,13 @@ Encryption: It prompts the user to input a message (within the valid range) and 
 
 Decryption: Finally, the program decrypts the ciphertext using the private key and displays the original message, demonstrating the end-to-end encryption and decryption process.
 
-## how to run file
+## How to run file
 
 run file ElGalmal.cpp 
 
 <img width="659" alt="image" src="https://github.com/Vidacelinda/ElGamal-asymmetric-encryption/assets/87499194/bb9d78b0-6353-4464-bcaa-0f4dd8ffc2b0">
 
 
-### terminal out put 
+### Terminal output 
 
 <img width="784" alt="image" src="https://github.com/Vidacelinda/ElGamal-asymmetric-encryption/assets/87499194/deec8149-2d38-47c0-a9b8-86b04b87ab86">
