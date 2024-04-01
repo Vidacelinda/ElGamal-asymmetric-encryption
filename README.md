@@ -7,7 +7,7 @@ ElGamal encryption is a public-key cryptosystem based on the Diffie-Hellman key 
 
 Key Generation: Involves choosing a large prime number \(p\), a generator \(g\) of the multiplicative group of integers modulo \(p\), a private key \(x\) randomly selected from \(1\) to \(p-2\), and a public key \(y = g^x \mod p\).
 
-Encryption: Uses the recipient's public key to encrypt a message \(m\) into a ciphertext \((c_1, c_2)\), where \(c_1 = g^k \mod p\) and \(c_2 = m \cdot y^k \mod p\), with \(k\) being a randomly chosen number for each encryption process.
+Encryption: Uses the recipient's public key to encrypt a message \(m\) into a ciphertext \((c_1, c_2)\), where \(c_1 = g^k \mod p\) and \(c_2 = m \c dot y^k \mod p\), with \(k\) being a randomly chosen number for each encryption process.
 
 Decryption: Uses the private key \(x\) to decrypt the ciphertext \((c_1, c_2)\) back into the original message \(m\), by computing the shared secret \(s = c_1^x \mod p\) and its inverse to finally recover \(m = c_2 \cdot s^{-1} \mod p\).
 
